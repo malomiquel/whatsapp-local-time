@@ -29,12 +29,26 @@ Example: Alex lives in Bali and writes in your "Family" group.
 2. Under "Alex", type `Bali` and pick **Bali (Asia/Makassar)**.
 
 The setting is saved per name and synced with your Chrome account: it applies in every group and in your private chat
-with that person. In a group, the list shows members with a message loaded on screen; scroll up to see more.
+with that person. In a group, the panel lists every member shown in the group header, even those who haven't written
+recently, and the header clock shows their time whether or not they have a message on screen.
 
 Without a manual setting, the time zone is guessed from the phone number's country code when it is visible (`≈` when
 the country spans several zones). A French number used abroad is still seen as "Paris": set the time zone by hand.
 
 The extension popup lists saved time zones and lets you hide the time on messages.
+
+## Development
+
+Built with React, Tailwind CSS and [shadcn/ui](https://ui.shadcn.com) (Luma style), bundled by Vite.
+
+```bash
+npm install
+npm run build   # outputs the extension to dist/
+```
+
+Load `dist/` with **Load unpacked**. The header clock and message times are plain DOM inserted into WhatsApp's page
+(`src/content/controller.ts`), so they keep WhatsApp's own styles; the time zone panel is a React app rendered in a
+shadow root (`src/content/Panel.tsx`), and the toolbar popup lives in `src/popup/`.
 
 ## Privacy
 

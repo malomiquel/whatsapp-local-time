@@ -1,0 +1,55 @@
+/* Injected into WhatsApp's own document: the header badge and message labels live in its DOM. */
+
+/* Mirrors WhatsApp's header icon buttons: 40px round hit area, 24px glyph in the primary text colour. */
+#wlt-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 12px 0 8px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--primary, #0a0a0a);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#wlt-badge:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+#wlt-badge:active {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+#wlt-badge:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 1px;
+}
+
+#wlt-badge svg {
+  flex: none;
+}
+
+#wlt-badge.wlt-badge--idle {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+#wlt-badge.wlt-badge--idle span {
+  display: none;
+}
+
+/* Takes WhatsApp's own time classes at runtime, so font, size and colour match; only wrapping is ours. */
+.wlt-msg {
+  white-space: nowrap;
+}

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WhatsApp Local Time",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "See the real local time of WhatsApp Web contacts (and each group member) living in another time zone.",
   "icons": {
     "16": "icons/icon16.png",
@@ -22,9 +22,14 @@
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["timezones.js", "content.js"],
-      "css": ["content.css"],
+      "js": ["content.js"],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["fonts/*.woff2"],
+      "matches": ["https://web.whatsapp.com/*"]
     }
   ]
 }
