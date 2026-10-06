@@ -1,0 +1,150 @@
+/* Mirrors WhatsApp's header icon buttons: 40px round hit area, 24px glyph in the primary text colour. */
+#wtz-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 12px 0 8px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--primary, #0a0a0a);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#wtz-badge:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+#wtz-badge:active {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+#wtz-badge:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 1px;
+}
+
+#wtz-badge svg {
+  flex: none;
+}
+
+#wtz-badge.wtz-badge--idle {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+#wtz-badge.wtz-badge--idle span {
+  display: none;
+}
+
+/* Takes WhatsApp's own time classes at runtime, so font, size and colour match; only wrapping is ours. */
+.wtz-msg {
+  white-space: nowrap;
+}
+
+#wtz-panel {
+  position: fixed;
+  z-index: 10000;
+  width: 330px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--dropdown-background, #fff);
+  color: var(--primary, #111b21);
+  box-shadow: 0 2px 5px rgba(11, 20, 26, 0.26), 0 8px 24px rgba(11, 20, 26, 0.16);
+  font-size: 14px;
+}
+
+.wtz-panel__title {
+  margin-bottom: 10px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wtz-panel__hint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--secondary, #667781);
+}
+
+.wtz-row {
+  padding: 10px 0;
+  border-top: 1px solid rgba(134, 150, 160, 0.2);
+}
+
+.wtz-row__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.wtz-row__name {
+  font-weight: 500;
+}
+
+.wtz-row__meta {
+  font-size: 12px;
+  color: var(--secondary, #667781);
+  font-variant-numeric: tabular-nums;
+}
+
+.wtz-field input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid rgba(134, 150, 160, 0.4);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.wtz-field input:focus {
+  border-color: #25d366;
+}
+
+.wtz-suggestions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.wtz-suggestions button,
+.wtz-row__reset {
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wtz-suggestions button:hover {
+  background: rgba(134, 150, 160, 0.15);
+}
+
+.wtz-row__reset {
+  margin-top: 4px;
+  padding-left: 0;
+  font-size: 12px;
+  color: #008069;
+}

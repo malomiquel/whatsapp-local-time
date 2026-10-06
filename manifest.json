@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Heure Locale",
+  "version": "1.0.0",
+  "description": "Affiche l'heure réelle de vos contacts (et de chaque membre d'un groupe) qui vivent dans un autre fuseau horaire.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "WhatsApp Heure Locale",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["timezones.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

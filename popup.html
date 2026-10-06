@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>WhatsApp Heure Locale</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>🕐 Heure locale</h1>
+
+  <label class="toggle">
+    <input type="checkbox" id="per-message">
+    <span>Afficher leur heure sous chaque message</span>
+  </label>
+
+  <h2>Fuseaux enregistrés</h2>
+  <ul id="people"></ul>
+  <p id="empty" class="hint" hidden>
+    Aucun pour l'instant. Dans WhatsApp Web, cliquez sur 🕐 dans l'en-tête d'une discussion pour choisir le fuseau
+    d'un contact ou des membres d'un groupe.
+  </p>
+
+  <script src="timezones.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
