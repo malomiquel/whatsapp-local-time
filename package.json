@@ -1,7 +1,7 @@
 {
   "name": "whatsapp-local-time",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "module",
   "scripts": {
     "build": "tsc -b && rm -rf dist && vite build && TARGET=popup vite build",
