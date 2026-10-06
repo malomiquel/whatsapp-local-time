@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
   "name": "WhatsApp Local Time",
-  "version": "1.2.0",
+  "version": "1.3.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxNwjPTFxz7QwAvh6sqZKEPiqjKAenutkfZjmR4X/w22IFatdtANsrsOJ9qB/qrEw2bEN9AyinxklurjQ9ahQZF2i8eAIn9XuPTGBysN/rM8spANrCYCoIT/yNLb4lb7fTzi1Q4UHBy9R32mA4zs4fZ1N29KVTcOZ2Vt3n80maC4rnSvIqpqWKuLLW2F2fsbTthlzkxWJ1dB7cmlSmLuhHSHMA3o7Lpdd2FFiyuFL/F65U/HWu4A1oRGNc/XCkW34JR5bjhCKT9WZaS557UDm8Xxyjdfso8TkSg7w3hKDs2AhJq2vY7WfDsb9sD9flMHdUPmbOxBgf2mYabOqvaO3swIDAQAB",
   "description": "See the real local time of WhatsApp Web contacts (and each group member) living in another time zone.",
   "icons": {
     "16": "icons/icon16.png",
@@ -17,19 +18,31 @@
       "32": "icons/icon32.png"
     }
   },
-  "permissions": ["storage"],
-  "host_permissions": ["https://web.whatsapp.com/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://web.whatsapp.com/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["fonts/*.woff2"],
-      "matches": ["https://web.whatsapp.com/*"]
+      "resources": [
+        "fonts/*.woff2"
+      ],
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ]
     }
   ]
 }

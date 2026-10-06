@@ -1,35 +1,15 @@
 import * as React from "react"
-import { UsersIcon } from "lucide-react"
 
 import { ZonePicker } from "@/components/zone-picker"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty"
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item"
+import { Item, ItemActions, ItemContent, ItemTitle } from "@/components/ui/item"
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
-  PopoverDescription,
   PopoverHeader,
   PopoverTitle,
 } from "@/components/ui/popover"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { initials, sameAsMine, zoneSummary } from "@/shared/format"
+import { sameAsMine, zoneSummary } from "@/shared/format"
 import { setPersonZone } from "@/shared/storage"
 
 import { controller, type PanelPerson } from "./controller"
@@ -49,43 +29,28 @@ export function Panel() {
       <PopoverAnchor virtualRef={anchorRef as React.RefObject<HTMLElement>} />
       <PopoverContent
         align="end"
-        sideOffset={8}
-        className="w-96 gap-3 p-3"
+        sideOffset={6}
+        className="w-72 gap-0 rounded-2xl p-1.5"
         // The badge toggles the panel itself; don't let its click count as "outside".
         onInteractOutside={(e) => {
           if (anchor.contains(e.target as Node)) e.preventDefault()
         }}
       >
-        <PopoverHeader className="px-2 pt-1">
-          <PopoverTitle className="truncate">
+        <PopoverHeader className="px-2 pt-1 pb-1.5">
+          <PopoverTitle className="truncate text-xs font-medium text-muted-foreground">
             {chat.isGroup ? chat.title : "Local time"}
           </PopoverTitle>
-          <PopoverDescription>
-            {chat.isGroup
-              ? `${people.length} ${people.length === 1 ? "person" : "people"} · pick where each one lives`
-              : `Pick where ${chat.title} lives`}
-          </PopoverDescription>
         </PopoverHeader>
         {people.length ? (
-          <ScrollArea className="max-h-96">
-            <ItemGroup className="gap-1">
-              {people.map((person) => (
-                <PersonRow key={person.key} person={person} />
-              ))}
-            </ItemGroup>
-          </ScrollArea>
+          <div className="flex max-h-80 flex-col overflow-y-auto overscroll-contain">
+            {people.map((person) => (
+              <PersonRow key={person.key} person={person} />
+            ))}
+          </div>
         ) : (
-          <Empty>
-            <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <UsersIcon />
-              </EmptyMedia>
-              <EmptyTitle>No members yet</EmptyTitle>
-              <EmptyDescription>
-                Members appear once the group header lists them.
-              </EmptyDescription>
-            </EmptyHeader>
-          </Empty>
+          <p className="px-2 pb-2 text-xs text-muted-foreground">
+            Members appear once the group header lists them.
+          </p>
         )}
       </PopoverContent>
     </Popover>
@@ -94,27 +59,21 @@ export function Panel() {
 
 function PersonRow({ person }: { person: PanelPerson }) {
   const { zone } = person
+  const away = zone && !sameAsMine(zone.tz)
   return (
-    <Item size="sm">
-      <ItemMedia>
-        <Avatar>
-          <AvatarFallback>{initials(person.name)}</AvatarFallback>
-        </Avatar>
-      </ItemMedia>
+    <Item size="xs" className="rounded-xl py-1 pr-1 hover:bg-muted/60">
       <ItemContent className="min-w-0">
-        <ItemTitle className="w-full">
+        <ItemTitle className="w-full font-normal">
           <span className="truncate">{person.name}</span>
-          {zone && !zone.manual && <Badge variant="secondary">Guessed</Badge>}
         </ItemTitle>
-        <ItemDescription className="tabular-nums">
-          {!zone
-            ? "Time zone not set"
-            : sameAsMine(zone.tz)
-              ? `Same time as you · ${zone.tz.replace(/_/g, " ")}`
-              : `${zone.approx ? "≈ " : ""}${zoneSummary(zone.tz)}`}
-        </ItemDescription>
       </ItemContent>
-      <ItemActions>
+      <ItemActions className="gap-1">
+        {away && (
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {zone.approx ? "≈ " : ""}
+            {zoneSummary(zone.tz)}
+          </span>
+        )}
         <ZonePicker
           value={zone?.tz ?? null}
           manual={!!zone?.manual}

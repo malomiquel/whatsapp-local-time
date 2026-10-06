@@ -1,4 +1,5 @@
 import * as React from "react"
+import { cn } from "cn"
 import { CheckIcon, ChevronsUpDownIcon, RotateCcwIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -63,18 +64,18 @@ export function ZonePicker({ value, manual, onChange }: ZonePickerProps) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
-          size="sm"
+          variant="ghost"
+          size="xs"
           role="combobox"
           aria-expanded={open}
-          className="max-w-36"
+          className={cn("max-w-28", !manual && "text-muted-foreground")}
         >
           <span className="truncate">{value ? cityOf(value) : "Set"}</span>
           <ChevronsUpDownIcon data-icon="inline-end" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-72 p-0"
+        className="w-64 rounded-2xl p-0"
         align="end"
         // Radix can't find the input to focus from inside a shadow root; point it there.
         onOpenAutoFocus={(e) => {

@@ -1,7 +1,6 @@
 import { ClockIcon, XIcon } from "lucide-react"
 
 import { ZonePicker } from "@/components/zone-picker"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   Empty,
@@ -21,14 +20,12 @@ import {
   Item,
   ItemActions,
   ItemContent,
-  ItemDescription,
   ItemGroup,
-  ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { initials, sameAsMine, zoneSummary } from "@/shared/format"
+import { sameAsMine, zoneSummary } from "@/shared/format"
 import {
   forgetPerson,
   setPerMessage,
@@ -44,10 +41,10 @@ export function App() {
   )
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-3 p-3">
       <div className="flex flex-col gap-1">
-        <h1 className="text-base font-medium">WhatsApp Local Time</h1>
-        <p className="text-sm text-muted-foreground">
+        <h1 className="text-sm font-medium">WhatsApp Local Time</h1>
+        <p className="text-xs text-muted-foreground">
           Click the clock in a chat header to set where people live.
         </p>
       </div>
@@ -71,27 +68,28 @@ export function App() {
       <Separator />
 
       {saved.length ? (
-        <div className="flex flex-col gap-2">
-          <h2 className="px-1 text-sm font-medium text-muted-foreground">
+        <div className="flex flex-col gap-1">
+          <h2 className="px-2 text-xs font-medium text-muted-foreground">
             Saved time zones
           </h2>
-          <ItemGroup className="gap-1">
+          <ItemGroup className="gap-0">
             {saved.map(([key, { name, tz }]) => (
-              <Item key={key} size="sm" variant="muted">
-                <ItemMedia>
-                  <Avatar>
-                    <AvatarFallback>{initials(name)}</AvatarFallback>
-                  </Avatar>
-                </ItemMedia>
+              <Item
+                key={key}
+                size="xs"
+                className="rounded-xl py-1 pr-1 hover:bg-muted/60"
+              >
                 <ItemContent className="min-w-0">
-                  <ItemTitle className="w-full">
+                  <ItemTitle className="w-full font-normal">
                     <span className="truncate">{name}</span>
                   </ItemTitle>
-                  <ItemDescription className="tabular-nums">
-                    {sameAsMine(tz) ? "Same time as you" : zoneSummary(tz)}
-                  </ItemDescription>
                 </ItemContent>
-                <ItemActions>
+                <ItemActions className="gap-1">
+                  {!sameAsMine(tz) && (
+                    <span className="text-xs text-muted-foreground tabular-nums">
+                      {zoneSummary(tz)}
+                    </span>
+                  )}
                   <ZonePicker
                     value={tz}
                     manual
@@ -99,7 +97,7 @@ export function App() {
                   />
                   <Button
                     variant="ghost"
-                    size="icon-sm"
+                    size="icon-xs"
                     aria-label={`Forget ${name}`}
                     onClick={() => forgetPerson(key)}
                   >
