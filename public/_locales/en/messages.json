@@ -90,7 +90,7 @@
     "description": "Zone picker group heading"
   },
   "popupIntro": {
-    "message": "Click the clock in a chat header to set where people live.",
+    "message": "Click the globe button in a chat header to set where people live.",
     "description": "Popup intro"
   },
   "popupPerMessageLabel": {
@@ -119,7 +119,7 @@
     "description": "Popup empty state"
   },
   "popupEmptyDescription": {
-    "message": "Open a chat on web.whatsapp.com and click the clock next to the search icon.",
+    "message": "Open a chat on web.whatsapp.com and click the globe button next to the search icon.",
     "description": "Popup empty state"
   }
 }
