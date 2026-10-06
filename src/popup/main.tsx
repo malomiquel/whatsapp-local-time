@@ -5,6 +5,9 @@ import "@fontsource-variable/inter"
 import "@/index.css"
 import { App } from "./App"
 
+document.documentElement.lang = chrome.i18n.getUILanguage()
+document.title = chrome.i18n.getMessage("extName")
+
 const dark = matchMedia("(prefers-color-scheme: dark)")
 const applyTheme = () =>
   document.documentElement.classList.toggle("dark", dark.matches)

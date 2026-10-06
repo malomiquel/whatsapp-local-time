@@ -1,4 +1,5 @@
 import { diffLabel, offsetMinutes } from "./timezones"
+import { t } from "./i18n"
 
 export const MY_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -22,8 +23,8 @@ export function dayShift(tz: string, date: Date, short = false) {
   const theirs = dayKey(tz, date)
   const mine = dayKey(MY_TZ, date)
   if (theirs === mine) return ""
-  if (short) return theirs > mine ? " +1d" : " −1d"
-  return theirs > mine ? " (next day)" : " (previous day)"
+  if (short) return ` ${t(theirs > mine ? "nextDayShort" : "previousDayShort")}`
+  return ` ${t(theirs > mine ? "nextDay" : "previousDay")}`
 }
 
 export const sameAsMine = (tz: string, date = new Date()) =>

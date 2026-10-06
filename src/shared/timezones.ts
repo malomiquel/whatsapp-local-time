@@ -1,5 +1,7 @@
 // Guessing a time zone from a phone number, city search and offset labels.
 
+import { t } from "./i18n"
+
 // Country calling code -> main time zone. `approx` marks countries spanning several zones,
 // where the phone number alone cannot tell which one the person lives in.
 type CountryZone = { tz: string; approx?: boolean }
@@ -353,7 +355,7 @@ export function offsetMinutes(tz: string, date = new Date()): number {
 /** "+7h", "−5h30" relative to the browser's own zone. */
 export function diffLabel(tz: string, date = new Date()): string {
   const diff = offsetMinutes(tz, date) + date.getTimezoneOffset()
-  if (diff === 0) return "same time"
+  if (diff === 0) return t("sameTime")
   const abs = Math.abs(diff)
   const mins = abs % 60 ? String(abs % 60).padStart(2, "0") : ""
   return `${diff > 0 ? "+" : "−"}${Math.floor(abs / 60)}h${mins}`

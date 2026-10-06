@@ -1,0 +1,125 @@
+{
+  "extName": {
+    "message": "WhatsApp Local Time",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "See the real local time of WhatsApp Web contacts (and each group member) living in another time zone.",
+    "description": "Store description"
+  },
+  "sameTime": {
+    "message": "same time",
+    "description": "Offset label when the zone matches the user's"
+  },
+  "nextDayShort": {
+    "message": "+1d",
+    "description": "Appended to a message time that falls on the next day for them"
+  },
+  "previousDayShort": {
+    "message": "−1d",
+    "description": "Appended to a message time that falls on the previous day for them"
+  },
+  "nextDay": {
+    "message": "(next day)",
+    "description": "Long form, in tooltips"
+  },
+  "previousDay": {
+    "message": "(previous day)",
+    "description": "Long form, in tooltips"
+  },
+  "messageTimeTitle": {
+    "message": "$TIME$ for $NAME$ · $ZONE$ ($OFFSET$)",
+    "description": "Tooltip on a message's local time",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      },
+      "name": {
+        "content": "$2"
+      },
+      "zone": {
+        "content": "$3"
+      },
+      "offset": {
+        "content": "$4"
+      }
+    }
+  },
+  "badgeTitle": {
+    "message": "Local time: set time zones",
+    "description": "Tooltip on the header clock"
+  },
+  "badgeTitleGuessed": {
+    "message": "Time zone guessed from the phone number: click to set it",
+    "description": "Tooltip on the header clock"
+  },
+  "panelTitleContact": {
+    "message": "Local time",
+    "description": "Panel title in a one-to-one chat"
+  },
+  "panelNoMembers": {
+    "message": "Members appear once the group header lists them.",
+    "description": "Panel empty state"
+  },
+  "loadingMembers": {
+    "message": "Loading members",
+    "description": "Screen reader label"
+  },
+  "pickerSet": {
+    "message": "Set",
+    "description": "Zone picker button when no zone is known"
+  },
+  "pickerPlaceholder": {
+    "message": "City or country…",
+    "description": "Zone search placeholder"
+  },
+  "pickerEmpty": {
+    "message": "No time zone found.",
+    "description": "Zone search empty state"
+  },
+  "pickerAutomatic": {
+    "message": "Back to automatic",
+    "description": "Zone picker item that clears the manual zone"
+  },
+  "pickerResults": {
+    "message": "Results",
+    "description": "Zone picker group heading"
+  },
+  "pickerPopular": {
+    "message": "Popular",
+    "description": "Zone picker group heading"
+  },
+  "popupIntro": {
+    "message": "Click the clock in a chat header to set where people live.",
+    "description": "Popup intro"
+  },
+  "popupPerMessageLabel": {
+    "message": "Time on messages",
+    "description": "Popup switch label"
+  },
+  "popupPerMessageDescription": {
+    "message": "Show their time next to each message, e.g. 17:48 (23:48).",
+    "description": "Popup switch description"
+  },
+  "popupSaved": {
+    "message": "Saved time zones",
+    "description": "Popup list heading"
+  },
+  "popupForget": {
+    "message": "Forget $NAME$",
+    "description": "Remove button label",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEmptyTitle": {
+    "message": "No time zones yet",
+    "description": "Popup empty state"
+  },
+  "popupEmptyDescription": {
+    "message": "Open a chat on web.whatsapp.com and click the clock next to the search icon.",
+    "description": "Popup empty state"
+  }
+}

@@ -21,6 +21,9 @@ including each member of a group.
 
 Works in Chrome, Edge, Brave, Arc and other Chromium browsers.
 
+Available in English and French, following your browser's language. Translations live in
+`public/_locales/<lang>/messages.json`; adding a language is one more folder there.
+
 ## Setting someone's time zone
 
 Example: Alex lives in Bali and writes in your "Family" group.

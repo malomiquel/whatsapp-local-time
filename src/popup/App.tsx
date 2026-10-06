@@ -32,6 +32,7 @@ import {
   setPersonZone,
   useSettings,
 } from "@/shared/storage"
+import { t } from "@/shared/i18n"
 
 export function App() {
   const settings = useSettings()
@@ -43,18 +44,18 @@ export function App() {
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex flex-col gap-1">
-        <h1 className="text-sm font-medium">WhatsApp Local Time</h1>
-        <p className="text-xs text-muted-foreground">
-          Click the clock in a chat header to set where people live.
-        </p>
+        <h1 className="text-sm font-medium">{t("extName")}</h1>
+        <p className="text-xs text-muted-foreground">{t("popupIntro")}</p>
       </div>
 
       <FieldGroup>
         <Field orientation="horizontal">
           <FieldContent>
-            <FieldLabel htmlFor="per-message">Time on messages</FieldLabel>
+            <FieldLabel htmlFor="per-message">
+              {t("popupPerMessageLabel")}
+            </FieldLabel>
             <FieldDescription>
-              Show their time next to each message, e.g. 17:48 (23:48).
+              {t("popupPerMessageDescription")}
             </FieldDescription>
           </FieldContent>
           <Switch
@@ -70,7 +71,7 @@ export function App() {
       {saved.length ? (
         <div className="flex flex-col gap-1">
           <h2 className="px-2 text-xs font-medium text-muted-foreground">
-            Saved time zones
+            {t("popupSaved")}
           </h2>
           <ItemGroup className="gap-0">
             {saved.map(([key, { name, tz }]) => (
@@ -98,7 +99,7 @@ export function App() {
                   <Button
                     variant="ghost"
                     size="icon-xs"
-                    aria-label={`Forget ${name}`}
+                    aria-label={t("popupForget", name)}
                     onClick={() => forgetPerson(key)}
                   >
                     <XIcon />
@@ -114,11 +115,8 @@ export function App() {
             <EmptyMedia variant="icon">
               <ClockIcon />
             </EmptyMedia>
-            <EmptyTitle>No time zones yet</EmptyTitle>
-            <EmptyDescription>
-              Open a chat on web.whatsapp.com and click the clock next to the
-              search icon.
-            </EmptyDescription>
+            <EmptyTitle>{t("popupEmptyTitle")}</EmptyTitle>
+            <EmptyDescription>{t("popupEmptyDescription")}</EmptyDescription>
           </EmptyHeader>
         </Empty>
       )}

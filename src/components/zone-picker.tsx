@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/popover"
 import { timeIn } from "@/shared/format"
 import { cityOf, searchZones } from "@/shared/timezones"
+import { t } from "@/shared/i18n"
 
 const POPULAR = [
   "Europe/London",
@@ -70,7 +71,9 @@ export function ZonePicker({ value, manual, onChange }: ZonePickerProps) {
           aria-expanded={open}
           className={cn("max-w-28", !manual && "text-muted-foreground")}
         >
-          <span className="truncate">{value ? cityOf(value) : "Set"}</span>
+          <span className="truncate">
+            {value ? cityOf(value) : t("pickerSet")}
+          </span>
           <ChevronsUpDownIcon data-icon="inline-end" />
         </Button>
       </PopoverTrigger>
@@ -90,24 +93,26 @@ export function ZonePicker({ value, manual, onChange }: ZonePickerProps) {
         >
           <CommandInput
             ref={inputRef}
-            placeholder="City or country…"
+            placeholder={t("pickerPlaceholder")}
             value={query}
             onValueChange={setQuery}
           />
           <CommandList>
-            <CommandEmpty>No time zone found.</CommandEmpty>
+            <CommandEmpty>{t("pickerEmpty")}</CommandEmpty>
             {manual && !query && (
               <>
                 <CommandGroup>
                   <CommandItem onSelect={() => choose(null)}>
                     <RotateCcwIcon />
-                    Back to automatic
+                    {t("pickerAutomatic")}
                   </CommandItem>
                 </CommandGroup>
                 <CommandSeparator />
               </>
             )}
-            <CommandGroup heading={query ? "Results" : "Popular"}>
+            <CommandGroup
+              heading={t(query ? "pickerResults" : "pickerPopular")}
+            >
               {matches.map(({ tz, label }) => (
                 <CommandItem key={tz} value={tz} onSelect={() => choose(tz)}>
                   {tz === value && manual ? <CheckIcon /> : null}

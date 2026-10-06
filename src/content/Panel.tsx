@@ -16,6 +16,7 @@ import { sameAsMine, zoneSummary } from "@/shared/format"
 import { setPersonZone } from "@/shared/storage"
 
 import { controller, type PanelPerson } from "./controller"
+import { t } from "@/shared/i18n"
 
 export function Panel() {
   const { open, anchor, chat, people, loading } = React.useSyncExternalStore(
@@ -41,7 +42,7 @@ export function Panel() {
       >
         <PopoverHeader className="px-2 pt-1 pb-1.5">
           <PopoverTitle className="truncate text-xs font-medium text-muted-foreground">
-            {chat.isGroup ? chat.title : "Local time"}
+            {chat.isGroup ? chat.title : t("panelTitleContact")}
           </PopoverTitle>
         </PopoverHeader>
         {loading ? (
@@ -54,7 +55,7 @@ export function Panel() {
           </div>
         ) : (
           <p className="px-2 pb-2 text-xs text-muted-foreground">
-            Members appear once the group header lists them.
+            {t("panelNoMembers")}
           </p>
         )}
       </PopoverContent>
@@ -70,7 +71,7 @@ function LoadingRows() {
     <div
       className="flex flex-col"
       aria-busy="true"
-      aria-label="Loading members"
+      aria-label={t("loadingMembers")}
     >
       {SKELETON_WIDTHS.map((width) => (
         <div key={width} className="flex h-8 items-center justify-between px-3">

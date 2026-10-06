@@ -26,6 +26,7 @@ import {
   type Person,
   type Zone,
 } from "./whatsapp"
+import { t } from "@/shared/i18n"
 
 const BADGE_ID = "wlt-badge"
 const HEADER_MAX_PEOPLE = 2
@@ -107,9 +108,13 @@ function annotateMessages(chat: Chat, messages: Message[]) {
       continue
     }
     const text = `${zone.approx ? "≈ " : ""}${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date, true)}`
-    const title =
-      `${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date)} for ${person.name} · ` +
-      `${zone.tz.replace(/_/g, " ")} (${diffLabel(zone.tz, msg.date)})`
+    const title = t(
+      "messageTimeTitle",
+      `${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date)}`,
+      person.name,
+      zone.tz.replace(/_/g, " "),
+      diffLabel(zone.tz, msg.date)
+    )
     setLabel(msg.meta, text, title)
     setLabel(msg.spacer, text)
   }
@@ -162,14 +167,12 @@ function updateBadge(header: Element, chat: Chat, people: PanelPerson[]) {
       !!p.zone && !sameAsMine(p.zone.tz, now)
   )
   let text = ""
-  let title = "Local time: set time zones"
+  let title = t("badgeTitle")
   const [first] = shown
   if (first && !chat.isGroup) {
     const { zone } = first
     text = `${zone.approx ? "≈ " : ""}${timeIn(zone.tz, now)} · ${cityOf(zone.tz)} (${diffLabel(zone.tz, now)})`
-    title = zone.approx
-      ? "Time zone guessed from the phone number: click to set it"
-      : zone.tz
+    title = zone.approx ? t("badgeTitleGuessed") : zone.tz
   } else if (shown.length) {
     const parts = shown
       .slice(0, HEADER_MAX_PEOPLE)

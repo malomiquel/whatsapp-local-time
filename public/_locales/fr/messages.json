@@ -1,0 +1,125 @@
+{
+  "extName": {
+    "message": "WhatsApp Heure Locale",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Affiche l'heure réelle de vos contacts WhatsApp Web (et de chaque membre d'un groupe) qui vivent dans un autre fuseau horaire.",
+    "description": "Store description"
+  },
+  "sameTime": {
+    "message": "même heure",
+    "description": "Offset label when the zone matches the user's"
+  },
+  "nextDayShort": {
+    "message": "+1 j",
+    "description": "Appended to a message time that falls on the next day for them"
+  },
+  "previousDayShort": {
+    "message": "−1 j",
+    "description": "Appended to a message time that falls on the previous day for them"
+  },
+  "nextDay": {
+    "message": "(lendemain)",
+    "description": "Long form, in tooltips"
+  },
+  "previousDay": {
+    "message": "(veille)",
+    "description": "Long form, in tooltips"
+  },
+  "messageTimeTitle": {
+    "message": "$TIME$ pour $NAME$ · $ZONE$ ($OFFSET$)",
+    "description": "Tooltip on a message's local time",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      },
+      "name": {
+        "content": "$2"
+      },
+      "zone": {
+        "content": "$3"
+      },
+      "offset": {
+        "content": "$4"
+      }
+    }
+  },
+  "badgeTitle": {
+    "message": "Heure locale : définir les fuseaux",
+    "description": "Tooltip on the header clock"
+  },
+  "badgeTitleGuessed": {
+    "message": "Fuseau deviné depuis le numéro : cliquez pour le préciser",
+    "description": "Tooltip on the header clock"
+  },
+  "panelTitleContact": {
+    "message": "Heure locale",
+    "description": "Panel title in a one-to-one chat"
+  },
+  "panelNoMembers": {
+    "message": "Les membres apparaissent dès que l'en-tête du groupe les liste.",
+    "description": "Panel empty state"
+  },
+  "loadingMembers": {
+    "message": "Chargement des membres",
+    "description": "Screen reader label"
+  },
+  "pickerSet": {
+    "message": "Choisir",
+    "description": "Zone picker button when no zone is known"
+  },
+  "pickerPlaceholder": {
+    "message": "Ville ou pays…",
+    "description": "Zone search placeholder"
+  },
+  "pickerEmpty": {
+    "message": "Aucun fuseau trouvé.",
+    "description": "Zone search empty state"
+  },
+  "pickerAutomatic": {
+    "message": "Revenir à l'automatique",
+    "description": "Zone picker item that clears the manual zone"
+  },
+  "pickerResults": {
+    "message": "Résultats",
+    "description": "Zone picker group heading"
+  },
+  "pickerPopular": {
+    "message": "Populaires",
+    "description": "Zone picker group heading"
+  },
+  "popupIntro": {
+    "message": "Cliquez sur l'horloge en haut d'une discussion pour indiquer où vivent les gens.",
+    "description": "Popup intro"
+  },
+  "popupPerMessageLabel": {
+    "message": "Heure sur les messages",
+    "description": "Popup switch label"
+  },
+  "popupPerMessageDescription": {
+    "message": "Affiche leur heure à côté de chaque message, ex. 17:48 (23:48).",
+    "description": "Popup switch description"
+  },
+  "popupSaved": {
+    "message": "Fuseaux enregistrés",
+    "description": "Popup list heading"
+  },
+  "popupForget": {
+    "message": "Oublier $NAME$",
+    "description": "Remove button label",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEmptyTitle": {
+    "message": "Aucun fuseau pour l'instant",
+    "description": "Popup empty state"
+  },
+  "popupEmptyDescription": {
+    "message": "Ouvrez une discussion sur web.whatsapp.com et cliquez sur l'horloge à côté de la loupe.",
+    "description": "Popup empty state"
+  }
+}
