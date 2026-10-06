@@ -3,9 +3,11 @@
 Chrome extension for **WhatsApp Web** that shows the real local time of contacts living in another time zone,
 including each member of a group.
 
+![Each message shows the sender's local time in brackets, and the header shows everyone's current time](docs/chat.png)
+
 ## What it shows
 
-- **In the chat header**: a clock styled like WhatsApp's own icons, with the person's current time, e.g.
+- **In the chat header**: a globe-and-clock button styled like WhatsApp's own icons, with the person's current time, e.g.
   `🕒 Alex 15:22`, or for a contact `🕒 15:22 · Makassar (+6h)`.
 - **On every message**, in brackets after WhatsApp's time and in the same font: what time it was for the person when
   the message was sent, e.g. `17:48 (23:48)` or `23:30 (05:30 +1d)`.
@@ -28,8 +30,14 @@ Available in English and French, following your browser's language. Translations
 
 Example: Alex lives in Bali and writes in your "Family" group.
 
-1. Open the chat and click the 🕒 clock in the header.
-2. Under "Alex", type `Bali` and pick **Bali (Asia/Makassar)**.
+1. Open the chat and click the globe-and-clock button in the header, next to the search icon. It lists everyone in
+   the chat with their current time.
+
+   ![The panel lists every group member with their time and time zone](docs/panel.png)
+
+2. Click **Set** next to "Alex", type `Bali` and pick **Bali (Asia/Makassar)**.
+
+   ![Searching "bali" suggests Asia/Makassar](docs/picker.png)
 
 The setting is saved per name and synced with your Chrome account: it applies in every group and in your private chat
 with that person. In a group, the panel lists every member shown in the group header, even those who haven't written

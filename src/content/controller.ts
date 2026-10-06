@@ -26,14 +26,11 @@ import {
   type Person,
   type Zone,
 } from "./whatsapp"
+import { GLOBE_CLOCK_VIEWBOX, globeClockMarkup } from "@/shared/globe-clock"
 import { t } from "@/shared/i18n"
 
 const BADGE_ID = "wlt-badge"
 const HEADER_MAX_PEOPLE = 2
-
-// Material Symbols "schedule", the icon family WhatsApp Web uses in its header.
-const CLOCK_PATH =
-  "m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"
 
 export type PanelPerson = Person & { zone: Zone | null }
 export type Snapshot = {
@@ -124,17 +121,15 @@ function annotateMessages(chat: Chat, messages: Message[]) {
 // Header badge
 // ---------------------------------------------------------------------------
 
-function clockIcon(size: number) {
-  const NS = "http://www.w3.org/2000/svg"
-  const svg = document.createElementNS(NS, "svg")
-  svg.setAttribute("viewBox", "0 -960 960 960")
+function globeClockIcon(size: number) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+  svg.setAttribute("viewBox", GLOBE_CLOCK_VIEWBOX)
   svg.setAttribute("width", String(size))
   svg.setAttribute("height", String(size))
   svg.setAttribute("fill", "currentColor")
   svg.setAttribute("aria-hidden", "true")
-  const path = document.createElementNS(NS, "path")
-  path.setAttribute("d", CLOCK_PATH)
-  svg.appendChild(path)
+  // Static markup from our own constants, no page data.
+  svg.innerHTML = globeClockMarkup("wlt-globe-clock-mask")
   return svg
 }
 
@@ -145,7 +140,7 @@ function ensureBadge(header: Element) {
   badge = document.createElement("button")
   badge.id = BADGE_ID
   badge.setAttribute("type", "button")
-  badge.append(clockIcon(24), document.createElement("span"))
+  badge.append(globeClockIcon(24), document.createElement("span"))
   badge.addEventListener("click", (e) => {
     e.stopPropagation()
     publish({ open: !snapshot.open })
