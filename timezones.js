@@ -109,7 +109,15 @@
     coree: 'Asia/Seoul', melbourne: 'Australia/Melbourne', 'nouvelle zelande': 'Pacific/Auckland', dubai: 'Asia/Dubai',
     'abu dhabi': 'Asia/Dubai', marrakech: 'Africa/Casablanca', maroc: 'Africa/Casablanca', senegal: 'Africa/Dakar',
     madagascar: 'Indian/Antananarivo', canaries: 'Atlantic/Canary', tenerife: 'Atlantic/Canary', acores: 'Atlantic/Azores',
-    islande: 'Atlantic/Reykjavik', canada: 'America/Toronto', bresil: 'America/Sao_Paulo', australie: 'Australia/Sydney'
+    islande: 'Atlantic/Reykjavik', canada: 'America/Toronto', bresil: 'America/Sao_Paulo', australie: 'Australia/Sydney',
+    // English names
+    india: 'Asia/Kolkata', thailand: 'Asia/Bangkok', japan: 'Asia/Tokyo', korea: 'Asia/Seoul', 'south korea': 'Asia/Seoul',
+    china: 'Asia/Shanghai', 'new zealand': 'Pacific/Auckland', morocco: 'Africa/Casablanca', 'canary islands': 'Atlantic/Canary',
+    azores: 'Atlantic/Azores', iceland: 'Atlantic/Reykjavik', brazil: 'America/Sao_Paulo', australia: 'Australia/Sydney',
+    indonesia: 'Asia/Jakarta', philippines: 'Asia/Manila', 'french polynesia': 'Pacific/Tahiti', 'new caledonia': 'Pacific/Noumea',
+    mauritius: 'Indian/Mauritius', 'french guiana': 'America/Cayenne', 'los angeles': 'America/Los_Angeles', california: 'America/Los_Angeles',
+    texas: 'America/Chicago', florida: 'America/New_York', hawaii: 'Pacific/Honolulu', uk: 'Europe/London', england: 'Europe/London',
+    'united kingdom': 'Europe/London', usa: 'America/New_York', 'united states': 'America/New_York', uae: 'Asia/Dubai'
   };
 
   const ALL_ZONES = (() => {
@@ -149,13 +157,13 @@
     return Math.round((asUtc - Math.floor(date.getTime() / 60000) * 60000) / 60000);
   }
 
-  /** "+7 h", "−5 h 30" relative to the browser's own zone. */
+  /** "+7h", "−5h30" relative to the browser's own zone. */
   function diffLabel(tz, date = new Date()) {
     const diff = offsetMinutes(tz, date) + date.getTimezoneOffset();
-    if (diff === 0) return 'même heure';
+    if (diff === 0) return 'same time';
     const abs = Math.abs(diff);
-    const mins = abs % 60 ? ` ${String(abs % 60).padStart(2, '0')}` : '';
-    return `${diff > 0 ? '+' : '−'}${Math.floor(abs / 60)} h${mins}`;
+    const mins = abs % 60 ? String(abs % 60).padStart(2, '0') : '';
+    return `${diff > 0 ? '+' : '−'}${Math.floor(abs / 60)}h${mins}`;
   }
 
   globalThis.WTZ = { guessFromPhone, searchZones, cityOf, offsetMinutes, diffLabel };

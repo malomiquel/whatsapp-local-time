@@ -21,7 +21,7 @@
 
       const remove = document.createElement('button');
       remove.type = 'button';
-      remove.title = 'Oublier ce fuseau';
+      remove.title = 'Forget this time zone';
       remove.textContent = '✕';
       remove.addEventListener('click', () => {
         const next = { ...people };

@@ -1,54 +1,51 @@
-# WhatsApp Heure Locale
+# WhatsApp Local Time
 
-Extension Chrome pour **WhatsApp Web** qui affiche l'heure réelle de vos contacts vivant dans un autre fuseau horaire,
-y compris pour chaque membre d'un groupe.
+Chrome extension for **WhatsApp Web** that shows the real local time of contacts living in another time zone,
+including each member of a group.
 
-*Chrome extension for WhatsApp Web showing the real local time of contacts (and group members) in other time zones.*
+## What it shows
 
-## Ce qu'elle affiche
+- **In the chat header**: a clock styled like WhatsApp's own icons, with the person's current time, e.g.
+  `🕒 Alex 15:22`, or for a contact `🕒 15:22 · Makassar (+6h)`.
+- **On every message**, in brackets after WhatsApp's time and in the same font: what time it was for the person when
+  the message was sent, e.g. `17:48 (23:48)` or `23:30 (05:30 +1d)`.
+  Works on text messages, photos and videos. Hover for details (time zone, offset).
+- People in your own time zone are left untouched.
 
-- **Dans l'en-tête de la discussion** : une horloge dans le style des icônes WhatsApp, avec l'heure actuelle de la
-  personne, par exemple `🕒 Alex 15:22`, ou pour un contact `🕒 15:22 · Makassar (+6 h)`.
-- **Sur chaque message**, entre parenthèses après l'heure WhatsApp, dans la même typo : l'heure qu'il était pour la
-  personne au moment du message, par exemple `17:48 (23:48)` ou `23:30 (05:30 +1 j)`.
-  Fonctionne sur les messages texte, les photos et les vidéos. Le survol donne le détail (fuseau, décalage).
-- Les personnes dans le même fuseau que vous ne sont pas annotées.
+## Install
 
-## Installation
+1. Download **`whatsapp-local-time.zip`** from the [latest release](../../releases/latest) and unzip it.
+2. Open `chrome://extensions` and turn on **Developer mode** (top right).
+3. Click **Load unpacked** and select the unzipped folder.
+4. Open or reload [web.whatsapp.com](https://web.whatsapp.com).
 
-1. Télécharger **`whatsapp-heure-locale.zip`** depuis la [dernière release](../../releases/latest) et le dézipper.
-2. Ouvrir `chrome://extensions` et activer le **Mode développeur** (en haut à droite).
-3. Cliquer sur **Charger l'extension non empaquetée** et choisir le dossier dézippé.
-4. Ouvrir ou recharger [web.whatsapp.com](https://web.whatsapp.com).
+Works in Chrome, Edge, Brave, Arc and other Chromium browsers.
 
-Compatible avec Chrome, Edge, Brave, Arc et les autres navigateurs Chromium.
+## Setting someone's time zone
 
-## Choisir le fuseau de quelqu'un
+Example: Alex lives in Bali and writes in your "Family" group.
 
-Exemple : Alex vit à Bali et écrit dans votre groupe « Famille ».
+1. Open the chat and click the 🕒 clock in the header.
+2. Under "Alex", type `Bali` and pick **Bali (Asia/Makassar)**.
 
-1. Ouvrir la discussion, cliquer sur l'horloge 🕒 dans l'en-tête.
-2. Sous « Alex », taper `Bali` et choisir **Bali (Asia/Makassar)**.
+The setting is saved per name and synced with your Chrome account: it applies in every group and in your private chat
+with that person. In a group, the list shows members with a message loaded on screen; scroll up to see more.
 
-Le réglage est mémorisé par nom et synchronisé avec votre compte Chrome : il vaut dans tous les groupes et dans la
-discussion privée avec cette personne. Dans un groupe, la liste contient les membres qui ont un message chargé à
-l'écran : remontez dans la discussion pour en faire apparaître d'autres.
+Without a manual setting, the time zone is guessed from the phone number's country code when it is visible (`≈` when
+the country spans several zones). A French number used abroad is still seen as "Paris": set the time zone by hand.
 
-Sans réglage, le fuseau est deviné depuis l'indicatif du numéro quand il est visible (`≈` quand le pays a plusieurs
-fuseaux). Un numéro français utilisé depuis l'étranger reste vu comme « Paris » : choisissez alors le fuseau à la main.
+The extension popup lists saved time zones and lets you hide the time on messages.
 
-Le popup de l'extension liste les fuseaux enregistrés et permet de masquer l'heure sur les messages.
+## Privacy
 
-## Confidentialité
+Everything runs in your browser. The extension reads the WhatsApp Web page to find times and names, and only stores the
+time zones you choose (`chrome.storage.sync`). No data is sent anywhere.
 
-Tout se passe dans votre navigateur. L'extension lit la page WhatsApp Web pour trouver les heures et les noms, et ne
-stocke que les fuseaux que vous choisissez (`chrome.storage.sync`). Aucune donnée n'est envoyée ailleurs.
+## Limitations
 
-## Limites
+- The extension relies on the structure of the WhatsApp Web page, which may change with WhatsApp updates.
+- Voice notes and stickers are not annotated.
 
-- L'extension s'appuie sur la structure de la page WhatsApp Web, qui peut changer avec les mises à jour de WhatsApp.
-- Les vocaux et autocollants ne sont pas annotés.
-
-## Licence
+## License
 
 MIT

@@ -210,13 +210,13 @@
   const timeIn = (tz, date) => new Intl.DateTimeFormat(undefined, { timeZone: tz, hour: '2-digit', minute: '2-digit' }).format(date);
   const dayKey = (tz, date) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
 
-  /** "" when it is the same calendar day for both of us, otherwise " (lendemain)" / " (veille)", or " +1 j" / " −1 j". */
+  /** "" when it is the same calendar day for both of us, otherwise " (next day)" / " (previous day)", or " +1d" / " −1d". */
   function dayShift(tz, date, short = false) {
     const theirs = dayKey(tz, date);
     const mine = dayKey(MY_TZ, date);
     if (theirs === mine) return '';
-    if (short) return theirs > mine ? ' +1 j' : ' −1 j';
-    return theirs > mine ? ' (lendemain)' : ' (veille)';
+    if (short) return theirs > mine ? ' +1d' : ' −1d';
+    return theirs > mine ? ' (next day)' : ' (previous day)';
   }
 
   const firstName = (name) => (name || '').split(/\s+/)[0] || name;
@@ -282,7 +282,7 @@
         continue;
       }
       const text = `${zone.approx ? '≈ ' : ''}${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date, true)}`;
-      const title = `${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date)} pour ${person.name} · ` +
+      const title = `${timeIn(zone.tz, msg.date)}${dayShift(zone.tz, msg.date)} for ${person.name} · ` +
         `${zone.tz.replace(/_/g, ' ')} (${diffLabel(zone.tz, msg.date)})`;
       setLabel(msg.meta, text, title);
       setLabel(msg.spacer, text);
@@ -331,11 +331,11 @@
       .filter(({ zone }) => zone && !sameAsMine(zone.tz, now));
 
     let text = '';
-    let title = 'Heure locale : définir le fuseau horaire';
+    let title = 'Local time: set time zone';
     if (shown.length && !chat.isGroup) {
       const { zone } = shown[0];
       text = `${zone.approx ? '≈ ' : ''}${timeIn(zone.tz, now)} · ${cityOf(zone.tz)} (${diffLabel(zone.tz, now)})`;
-      title = zone.approx ? 'Fuseau deviné depuis le numéro : cliquez pour le préciser' : zone.tz;
+      title = zone.approx ? 'Time zone guessed from the phone number: click to set it' : zone.tz;
     } else if (shown.length) {
       const parts = shown.slice(0, HEADER_MAX_PEOPLE).map(({ person, zone }) => `${firstName(person.name)} ${timeIn(zone.tz, now)}`);
       if (shown.length > HEADER_MAX_PEOPLE) parts.push(`+${shown.length - HEADER_MAX_PEOPLE}`);
@@ -381,7 +381,7 @@
 
     const heading = document.createElement('div');
     heading.className = 'wtz-panel__title';
-    heading.textContent = chat.isGroup ? `Fuseaux horaires · ${chat.title}` : 'Fuseau horaire du contact';
+    heading.textContent = chat.isGroup ? `Time zones · ${chat.title}` : 'Contact time zone';
     panel.appendChild(heading);
 
     for (const person of list) panel.appendChild(personRow(person));
@@ -390,8 +390,8 @@
       const hint = document.createElement('p');
       hint.className = 'wtz-panel__hint';
       hint.textContent = list.length
-        ? 'Seuls les membres ayant un message chargé apparaissent : remontez dans la discussion pour en voir d\'autres.'
-        : 'Aucun membre détecté : remontez dans la discussion pour charger des messages.';
+        ? 'Only members with a loaded message are listed: scroll up in the chat to see more.'
+        : 'No members found: scroll up in the chat to load messages.';
       panel.appendChild(hint);
     }
   }
@@ -408,15 +408,15 @@
     const meta = document.createElement('span');
     meta.className = 'wtz-row__meta';
     meta.textContent = zone
-      ? `${timeIn(zone.tz, now)} · ${zone.tz.replace(/_/g, ' ')} (${diffLabel(zone.tz, now)})${zone.manual ? '' : zone.approx ? ' · deviné ≈' : ' · deviné'}`
-      : 'Fuseau inconnu';
+      ? `${timeIn(zone.tz, now)} · ${zone.tz.replace(/_/g, ' ')} (${diffLabel(zone.tz, now)})${zone.manual ? '' : zone.approx ? ' · guessed ≈' : ' · guessed'}`
+      : 'Unknown time zone';
     const info = document.createElement('div');
     info.className = 'wtz-row__info';
     info.append(name, meta);
 
     const input = document.createElement('input');
     input.type = 'text';
-    input.placeholder = 'Ville ou pays (ex. Bali, Tokyo…)';
+    input.placeholder = 'City or country (e.g. Bali, Tokyo…)';
     input.spellcheck = false;
     const suggestions = document.createElement('div');
     suggestions.className = 'wtz-suggestions';
@@ -453,7 +453,7 @@
       const reset = document.createElement('button');
       reset.type = 'button';
       reset.className = 'wtz-row__reset';
-      reset.textContent = 'Revenir à l\'automatique';
+      reset.textContent = 'Back to automatic';
       reset.addEventListener('click', () => choose(null));
       row.appendChild(reset);
     }
