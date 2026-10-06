@@ -1,6 +1,9 @@
 import * as React from "react"
 
+import { cn } from "cn"
+
 import { ZonePicker } from "@/components/zone-picker"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Item, ItemActions, ItemContent, ItemTitle } from "@/components/ui/item"
 import {
   Popover,
@@ -15,7 +18,7 @@ import { setPersonZone } from "@/shared/storage"
 import { controller, type PanelPerson } from "./controller"
 
 export function Panel() {
-  const { open, anchor, chat, people } = React.useSyncExternalStore(
+  const { open, anchor, chat, people, loading } = React.useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot
   )
@@ -41,7 +44,9 @@ export function Panel() {
             {chat.isGroup ? chat.title : "Local time"}
           </PopoverTitle>
         </PopoverHeader>
-        {people.length ? (
+        {loading ? (
+          <LoadingRows />
+        ) : people.length ? (
           <div className="flex max-h-80 flex-col overflow-y-auto overscroll-contain">
             {people.map((person) => (
               <PersonRow key={person.key} person={person} />
@@ -54,6 +59,26 @@ export function Panel() {
         )}
       </PopoverContent>
     </Popover>
+  )
+}
+
+const SKELETON_WIDTHS = ["w-24", "w-32", "w-20", "w-28"]
+
+/** Placeholder rows shaped like PersonRow while the member list is still coming in. */
+function LoadingRows() {
+  return (
+    <div
+      className="flex flex-col"
+      aria-busy="true"
+      aria-label="Loading members"
+    >
+      {SKELETON_WIDTHS.map((width) => (
+        <div key={width} className="flex h-8 items-center justify-between px-3">
+          <Skeleton className={cn("h-3.5", width)} />
+          <Skeleton className="h-3.5 w-12" />
+        </div>
+      ))}
+    </div>
   )
 }
 

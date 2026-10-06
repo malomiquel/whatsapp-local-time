@@ -40,11 +40,25 @@ export type Snapshot = {
   anchor: HTMLElement | null
   chat: Chat | null
   people: PanelPerson[]
+  /** Still waiting for saved data or for WhatsApp to list the group's members. */
+  loading: boolean
 }
+
+// WhatsApp fills a group's member list in the header a moment after the chat opens.
+const MEMBERS_WAIT_MS = 1500
 
 let settings: Settings = { people: {}, perMessage: true }
 let groups: Groups = {}
-let snapshot: Snapshot = { open: false, anchor: null, chat: null, people: [] }
+let settingsLoaded = false
+let groupsLoaded = false
+let chatOpenedAt = Date.now()
+let snapshot: Snapshot = {
+  open: false,
+  anchor: null,
+  chat: null,
+  people: [],
+  loading: true,
+}
 const listeners = new Set<() => void>()
 
 function publish(next: Partial<Snapshot>) {
@@ -223,7 +237,20 @@ function scan() {
     (person) => ({ ...person, zone: zoneOf(person, settings.people) })
   )
   const anchor = updateBadge(header, chat, people)
-  publish({ chat, people, anchor })
+  publish({ chat, people, anchor, loading: isLoading(chat) })
+}
+
+/**
+ * Whether the member list may still grow: storage not read yet, or a chat we know nothing about whose header
+ * hasn't listed members yet (it may turn out to be a group). Rescans once the wait is over.
+ */
+function isLoading(chat: Chat) {
+  if (!settingsLoaded || !groupsLoaded) return true
+  if (groups[chat.title]?.members.length) return false
+  const waited = Date.now() - chatOpenedAt
+  if (waited >= MEMBERS_WAIT_MS) return false
+  setTimeout(scheduleScan, MEMBERS_WAIT_MS - waited)
+  return true
 }
 
 function scheduleScan() {
@@ -244,10 +271,12 @@ export const controller = {
   start() {
     watchSettings((next) => {
       settings = next
+      settingsLoaded = true
       scheduleScan()
     })
     loadGroups().then((loaded) => {
       groups = loaded
+      groupsLoaded = true
       scheduleScan()
     })
     let lastTitle: string | null = null
@@ -255,6 +284,7 @@ export const controller = {
       const title = chatTitle()
       if (title !== lastTitle) {
         lastTitle = title
+        chatOpenedAt = Date.now()
         if (snapshot.open) publish({ open: false })
       }
       scheduleScan()
